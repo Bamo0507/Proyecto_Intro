@@ -108,3 +108,5 @@ def check_weather(latitude, longitude):
             mensaje = f"A las {fecha[11:]}:\n La temperatura será  de {temp}°C, con una máxima de {t_max}°C y una mínima de {t_min}°C.\n {chance}, específicamente  {descripcion}."
             mensajes_hora.append(mensaje)
     return mensajes_hora, fecha
+
+
