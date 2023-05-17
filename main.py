@@ -38,7 +38,7 @@ def send_email(email_receiver, subject, body_message):
         server.login(email_data.my_email, email_data.password)
         server.sendmail(email_data.my_email, email_receiver, em.as_string())
 
-        # Agregar información del usuario
+# Agregar información del usuario
 def add_user():
 
     with open("users.json", "r") as file:
@@ -57,6 +57,7 @@ def add_user():
     with open("users.json", "w") as file:
         json.dump(data, file, indent=4)
 
+#Revisar el clima
 def check_weather(latitude, longitude):
     weather_params = {
         "lat":latitude,
