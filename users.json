@@ -1,0 +1,26 @@
+{
+    "Diego": {
+        "email": "lop23747@uvg.edu.gt",
+        "location": {
+            "ubication": "Villa Canales, Guatemala City",
+            "latitude": 14.5234058,
+            "longitude": -90.5876847
+        }
+    },
+    "Javier": {
+        "email": "djlopezreinoso@gmail.com",
+        "location": {
+            "ubication": "Villa Nueva, Guatemala City",
+            "latitude": 14.4985318,
+            "longitude": -90.6102767
+        }
+    },
+    "Carlos": {
+        "email": "perro@gmail.com",
+        "location": {
+            "ubication": "Tikal, Pet\u00e9n",
+            "latitude": 17.22081485,
+            "longitude": -89.61701648617823
+        }
+    }
+}
