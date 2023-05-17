@@ -37,3 +37,22 @@ def send_email(email_receiver, subject, body_message):
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=contex) as server:
         server.login(email_data.my_email, email_data.password)
         server.sendmail(email_data.my_email, email_receiver, em.as_string())
+
+        # Agregar información del usuario
+def add_user():
+
+    with open("users.json", "r") as file:
+        data = json.load(file)
+
+    name = input("Ingrese su nombre: ")
+    email = input("Ingrese su correo: ")
+    location = input("A continuar deberá ingresar su ubicación:"
+                     "\nDebe ingresar 'Municipio, Departamento'. Por ejemplo, si su ubicación es Fraijanes, escriba 'Fraijanes, Guatemala City': ")
+    
+    latitude, longitude = check_coordinates(location)
+
+    users = {name: {"email": email, "location": {"ubication":location, "latitude": latitude, "longitude": longitude}}}
+    print(users)
+    data.update(users)
+    with open("users.json", "w") as file:
+        json.dump(data, file, indent=4)
