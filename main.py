@@ -109,4 +109,33 @@ def check_weather(latitude, longitude):
             mensajes_hora.append(mensaje)
     return mensajes_hora, fecha
 
+def mandar_correos():
+    with open("users.json", "r") as file:
+        data = json.load(file)
+        for i in data:
+            email = data[i]["email"]
+            ubication = data[i]["location"]["ubication"]
+            latitude = data[i]["location"]["latitude"]
+            longitude = data[i]["location"]["longitude"]
+            mensaje, fecha = check_weather(latitude, longitude)
+            send_email(email, f"WeatherWacher: {ubication} {fecha[:10]}", mensaje)
 
+
+
+print("-"*50 + "BIENVENIDO A WEATHERWATCHER" +  "-"*50)
+print("A continuación, ingrese su nombre y correo para recibir notificaciones sobre el clima de su ubicación  ingresada.")
+
+
+while True:
+    opcion = input("1. Ingresar usuario\n2. Mandar correos\n3. Salir\nOpción: ")
+    if opcion == "1":
+        add_user()
+        print("Usuario agregado con éxito, Se le enviará un correo con el reporte del clima todos los días a las 6AM\n")
+    elif opcion == "2":
+        mandar_correos()
+        print("¡Correos enviados con éxito!\n")
+    elif opcion == "3":
+        print("Gracias por usar WeatherWatcher")
+        break
+    else:   
+        print("Opción inválida") 
