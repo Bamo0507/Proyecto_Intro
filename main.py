@@ -6,6 +6,7 @@ import smtplib
 import json
 from geopy.geocoders import Nominatim
 import datetime
+
 # Revisar las coordenadas de la ubicación del usuario
 def check_coordinates(location):
     geolocator = Nominatim(user_agent="my_app")
