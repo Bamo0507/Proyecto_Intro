@@ -56,3 +56,54 @@ def add_user():
     data.update(users)
     with open("users.json", "w") as file:
         json.dump(data, file, indent=4)
+
+def check_weather(latitude, longitude):
+    weather_params = {
+        "lat":latitude,
+        "lon":longitude,
+        "appid": api_key,
+        "units":"metric",
+        "lang":"es"
+    }
+
+    response = requests.get(OWM_Endpoint, params=weather_params)
+
+    response.raise_for_status()
+    weather_data = response.json()
+    current_date = str(datetime.datetime.today())[:10]
+    next_day = str(datetime.datetime.today() + datetime.timedelta(days=1))[:10]
+    mensajes_hora = []
+    fecha = ""
+
+    for i in weather_data["list"]:
+        if i["dt_txt"][:10] == current_date:
+            fecha = str(i["dt_txt"])
+            descripcion = str(i["weather"][0]["description"])
+            temp = str(i["main"]["temp"])
+            t_max = str(i["main"]["temp_max"])
+            t_min = str(i["main"]["temp_min"])
+            chance = ""
+            if i["pop"] > 0.5:
+                chance = "Existen altas probabilidades de lluvia"
+            else:
+                chance = "No hay altas probabilidades de lluvia"
+
+            mensaje = f"A las {fecha[11:]}:\n La temperatura será  de {temp}°C, con una máxima de {t_max}°C y una mínima de {t_min}°C.\n {chance}\nDescripción de clima: {descripcion}."
+            mensajes_hora.append(mensaje)
+
+
+        elif i["dt_txt"][:10] == next_day:
+            fecha = str(i["dt_txt"])
+            descripcion = str(i["weather"][0]["description"])
+            temp = str(i["main"]["temp"])
+            t_max = str(i["main"]["temp_max"])
+            t_min = str(i["main"]["temp_min"])
+            chance = ""
+            if i["pop"] > 0.5:
+                chance = "Existen altas probabilidades de lluvia"
+            else:
+                chance = "No hay altas probabilidades de lluvia"
+
+            mensaje = f"A las {fecha[11:]}:\n La temperatura será  de {temp}°C, con una máxima de {t_max}°C y una mínima de {t_min}°C.\n {chance}, específicamente  {descripcion}."
+            mensajes_hora.append(mensaje)
+    return mensajes_hora, fecha
